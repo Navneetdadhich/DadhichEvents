@@ -148,6 +148,10 @@ gsap.to(".page3 h4", {
 
 // contact form
 
+// Replace YOUR_BACKEND_URL with your actual backend URL
+const BACKEND_URL = 'https://dadhicheventss.onrender.com/'; // or whatever your backend URL is
+
+
 // Contact form handling
 // Contact form handling
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
@@ -182,7 +186,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             throw new Error('Please enter a valid phone number');
         }
 
-        const response = await fetch('https://dadhicheventss.onrender.com/', {
+        const response = await fetch('${BACKEND_URL}/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -211,3 +215,27 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 });
 
 
+// Frontend
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+        // ... fetch code ...
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again later.');
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+    }
+});
+
+// Backend
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
+});

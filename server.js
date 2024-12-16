@@ -80,3 +80,13 @@ app.get('/test-email', async (req, res) => {
         res.status(500).send('Email configuration error: ' + error.message);
     }
 });
+
+
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5 // limit each IP to 5 requests per windowMs
+});
+
+app.use('/api/contact', limiter);
