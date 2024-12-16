@@ -2,23 +2,26 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
 
-// Middleware with specific CORS configuration
+// Rate limiter
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5 // limit each IP to 5 requests per windowMs
+});
+
+// Middleware
 app.use(cors({
-    origin: 'https://dadhichevents.netlify.app/#contact', // Add your frontend URL here
+    origin: 'https://dadhichevents.netlify.app', // Remove /#contact
     methods: ['POST', 'GET'],
     credentials: true
 }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Test route
-app.get('/test', (req, res) => {
-    res.send('Server is working!');
-});
+app.use('/api/contact', limiter);
 
 // Email configuration
 const transporter = nodemailer.createTransport({
@@ -29,21 +32,25 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Test route
+app.get('/', (req, res) => {
+    res.json({ message: 'Server is working!' });
+});
+
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, phone, message } = req.body;
         
-        console.log('Received form data:', { name, email, phone, message }); // Debug log
+        console.log('Received form data:', { name, email, phone, message });
 
         if (!name || !email || !phone || !message) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-        // Email content
         const mailOptions = {
             from: process.env.EMAIL,
-            to: process.env.RECIPIENT_EMAIL, // Add this to your .env file
+            to: process.env.RECIPIENT_EMAIL,
             subject: 'New Contact Form Submission - Dadhich Events',
             html: `
                 <h3>New Contact Form Submission</h3>
@@ -54,44 +61,24 @@ app.post('/api/contact', async (req, res) => {
             `
         };
 
-        // Send email
         await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully'); // Debug log
+        console.log('Email sent successfully');
 
         res.status(200).json({ message: 'Message sent successfully!' });
     } catch (error) {
-        console.error('Server error:', error); // Debug log
+        console.error('Server error:', error);
         res.status(500).json({ message: 'Error sending message.', error: error.message });
     }
 });
 
-const PORT = process.env.PORT || 'https://dadhicheventss.onrender.com/';
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
-
-// Add this to server.js to test email configuration
-app.get('/test-email', async (req, res) => {
-    try {
-        await transporter.verify();
-        res.send('Email configuration is correct!');
-    } catch (error) {
-        res.status(500).send('Email configuration error: ' + error.message);
-    }
-});
-
-
-const rateLimit = require('express-rate-limit');
-
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 5 // limit each IP to 5 requests per windowMs
-});
-
-app.use('/api/contact', limiter);
-
+// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ error: 'Something broke!' });
+    res.status(500).json({ message: 'Something broke!' });
+});
+
+// Start server
+const PORT = process.env.PORT || 3000; // Use a number for port
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
