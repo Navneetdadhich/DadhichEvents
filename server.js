@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware with specific CORS configuration
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Add your frontend URL here
+    origin: 'https://dadhichevents.netlify.app/#contact', // Add your frontend URL here
     methods: ['POST', 'GET'],
     credentials: true
 }));
