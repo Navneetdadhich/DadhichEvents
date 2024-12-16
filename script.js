@@ -186,7 +186,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             throw new Error('Please enter a valid phone number');
         }
 
-        const response = await fetch('${BACKEND_URL}/api/contact', {
+        const response = await fetch('${BACKEND_URL}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -216,26 +216,22 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
 
 // Frontend
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+// form.addEventListener('submit', async (e) => {
+//     e.preventDefault();
     
-    const submitButton = form.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending...';
+//     const submitButton = form.querySelector('button[type="submit"]');
+//     submitButton.disabled = true;
+//     submitButton.textContent = 'Sending...';
 
-    try {
-        // ... fetch code ...
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Failed to send message. Please try again later.');
-    } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send Message';
-    }
-});
+//     try {
+//         // ... fetch code ...
+//     } catch (error) {
+//         console.error('Error:', error);
+//         alert('Failed to send message. Please try again later.');
+//     } finally {
+//         submitButton.disabled = false;
+//         submitButton.textContent = 'Send Message';
+//     }
+// });
 
 // Backend
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something broke!' });
-});

@@ -90,3 +90,8 @@ const limiter = rateLimit({
 });
 
 app.use('/api/contact', limiter);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
+});
