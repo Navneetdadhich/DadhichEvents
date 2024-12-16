@@ -182,7 +182,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             throw new Error('Please enter a valid phone number');
         }
 
-        const response = await fetch('http://localhost:3000/api/contact', {
+        const response = await fetch('https://dadhicheventss.onrender.com/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
