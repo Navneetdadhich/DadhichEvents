@@ -65,6 +65,7 @@ h2 {
     background: black;
     border: none;
     padding: 10px;
+    /* position: fixed; */
     z-index: 100;
 }
 
@@ -165,7 +166,7 @@ h2 {
     .hamburger {
         z-index: 102;
         display: block;
-        position: relative;
+        /* position: fixed; */
         border-radius: 5px;
     }
 
@@ -231,7 +232,7 @@ h2 {
         white-space: nowrap;
     }
 
-   
+    
 }
 
 
