@@ -165,6 +165,7 @@ const API_URL = window.location.hostname === 'localhost'
     : 'https://dadhichevents.onrender.com';
 
 
+  
 // Contact form handling
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();

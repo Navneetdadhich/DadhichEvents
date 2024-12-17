@@ -1,5 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const sanitizeHtml = require('sanitize-html');
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
@@ -29,8 +31,17 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: { message: 'Too many requests, please try again later.' }
+});
+
+// Apply rate limiting to contact endpoint
+app.use('/api/contact', limiter);
+
 // Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', async (req, res) => { 
     try {
         const { name, email, phone, message } = req.body;
         
@@ -39,6 +50,26 @@ app.post('/api/contact', async (req, res) => {
         if (!name || !email || !phone || !message) {
             return res.status(400).json({ message: 'All fields are required' });
         }
+
+         // Email format validation
+         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailRegex.test(email)) {
+             return res.status(400).json({ message: 'Invalid email format' });
+         }
+ 
+         // Phone format validation (basic example - adjust as needed)
+         const phoneRegex = /^\+?[\d\s-]{10,}$/;
+         if (!phoneRegex.test(phone)) {
+             return res.status(400).json({ message: 'Invalid phone format' });
+         }
+ 
+         // Sanitize inputs
+         const sanitizedData = {
+             name: sanitizeHtml(name.trim(), { allowedTags: [], allowedAttributes: {} }),
+             email: email.trim().toLowerCase(),
+             phone: phone.trim(),
+             message: sanitizeHtml(message.trim(), { allowedTags: [], allowedAttributes: {} })
+         };
 
         // Email content
         const mailOptions = {
