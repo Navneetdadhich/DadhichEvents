@@ -134,67 +134,67 @@ gsap.from(".contact-section",{
     });
 
 
-    gsap.from(".page2 h4", {
-        // y: 60,
-        // opacity: 0,
-        x: 150,
-        duration: 0.7,
-        delay: 0.5,
-        scrollTrigger: {
-            trigger: ".page2 ",
-            scroller: "body",
-            start: "top 70%",
-            end: "top -10%",
-            // markers: true,
-            scrub: 2,
-        },
-    });
+//     gsap.from(".page2 h4", {
+//         // y: 60,
+//         // opacity: 0,
+//         x: 150,
+//         duration: 0.7,
+//         delay: 0.5,
+//         scrollTrigger: {
+//             trigger: ".page2 ",
+//             scroller: "body",
+//             start: "top 70%",
+//             end: "top -10%",
+//             // markers: true,
+//             scrub: 2,
+//         },
+//     });
     
-    let mm = gsap.matchMedia();
+//     let mm = gsap.matchMedia();
 
-mm.add("(min-width: 801px)", () => {
-    // Desktop animation
-    gsap.to(".page3 h4", {
-        transform: "translateX(-200%)",
-        scrollTrigger: {
-            trigger: ".page3",
-            scroller: "body",
-            start: "top 0%",
-            end: "top -170%",
-            scrub: 3,
-            pin: true,
-            pinSpacing: true,
-            onLeave: self => {
-                gsap.set(".page3 h4", { clearProps: "all" });
-            },
-            onEnterBack: self => {
-                gsap.set(".page3 h4", { clearProps: "all" });
-            }
-        },
-    });
-});
+// mm.add("(min-width: 801px)", () => {
+//     // Desktop animation
+//     gsap.to(".page3 h4", {
+//         transform: "translateX(-200%)",
+//         scrollTrigger: {
+//             trigger: ".page3",
+//             scroller: "body",
+//             start: "top 0%",
+//             end: "top -170%",
+//             scrub: 3,
+//             pin: true,
+//             pinSpacing: true,
+//             onLeave: self => {
+//                 gsap.set(".page3 h4", { clearProps: "all" });
+//             },
+//             onEnterBack: self => {
+//                 gsap.set(".page3 h4", { clearProps: "all" });
+//             }
+//         },
+//     });
+// });
 
-mm.add("(max-width: 800px)", () => {
-    // Mobile animation
-    gsap.to(".page3 h4", {
-        transform: "translateX(-200%)",
-        scrollTrigger: {
-            trigger: ".page3",
-            scroller: "body",
-            start: "top 0%",
-            end: "top -100%", // Reduced scroll distance for mobile
-            scrub: 2,         // Faster scrub for mobile
-            pin: true,
-            pinSpacing: true,
-            onLeave: self => {
-                gsap.set(".page3 h4", { clearProps: "all" });
-            },
-            onEnterBack: self => {
-                gsap.set(".page3 h4", { clearProps: "all" });
-            }
-        },
-    });
-});
+// mm.add("(max-width: 800px)", () => {
+//     // Mobile animation
+//     gsap.to(".page3 h4", {
+//         transform: "translateX(-200%)",
+//         scrollTrigger: {
+//             trigger: ".page3",
+//             scroller: "body",
+//             start: "top 0%",
+//             end: "top -100%", // Reduced scroll distance for mobile
+//             scrub: 2,         // Faster scrub for mobile
+//             pin: true,
+//             pinSpacing: true,
+//             onLeave: self => {
+//                 gsap.set(".page3 h4", { clearProps: "all" });
+//             },
+//             onEnterBack: self => {
+//                 gsap.set(".page3 h4", { clearProps: "all" });
+//             }
+//         },
+//     });
+// });
 
 function showToast(message, type = 'success') {
     const toastContainer = document.querySelector('.toast-container');
