@@ -160,11 +160,9 @@ mm.add("(max-width: 800px)", () => {
     });
 });
     
-
-const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://dadhichevents.onrender.com' 
-    : 'http://localhost:3000';
-
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000'
+    : 'https://dadhichevents.onrender.com';
 
 
 // Contact form handling
