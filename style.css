@@ -61,6 +61,8 @@ h2 {
 /* Add these new styles */
 .hamburger {
     display: none;
+    /* align-items: center; */
+    /* justify-content: center; */
     cursor: pointer;
     background: black;
     border: none;
@@ -193,8 +195,8 @@ h2 {
     .hamburger.active{
         background: none;
         position: fixed;
-        margin-top: 20px;
-        
+        /* margin-top: 20px; */
+
     }
 
     /* Hamburger animation classes */
