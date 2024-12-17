@@ -1,31 +1,53 @@
 var tl = gsap.timeline();
 
-tl.from(".page1", {
-    opacity: 0,
-    duration: 1,
-    // delay: 0.5,
+var ma = gsap.matchMedia();
+ma.add("(min-width: 801px)", () => {
+    // Desktop animation
+    
+    tl.from(".page1", {
+        opacity: 0,
+        duration: 1,
+        // delay: 0.5,
+    });
+    
+    tl.from("#elems", {
+        y: -20,
+        opacity: 0,
+        duration: 0.7,
+        delay: 0.2,
+        stagger: 0.3,
+    });
+    
+    tl.from(".page1 h3", {
+        y: -20,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.3,
+    });
+    
+    tl.from(".page1 h1", {
+        y: -80,
+        opacity: 0,
+        duration: 1,
+        delay: 0.2,
+    });
 });
 
-tl.from("#elems", {
-    y: -20,
-    opacity: 0,
-    duration: 0.7,
-    delay: 0.2,
-    stagger: 0.3,
-});
-
-tl.from(".page1 h3", {
-    y: -20,
-    opacity: 0,
-    duration: 0.7,
-    stagger: 0.3,
-});
-
-tl.from(".page1 h1", {
-    y: -80,
-    opacity: 0,
-    duration: 1,
-    delay: 0.2,
+ma.add("(max-width: 800px)", () => {
+    // Mobile animation
+    tl.from(".page1 h3", {
+        y: -20,
+        opacity: 0,
+        duration: 0.2,
+        stagger: 0,
+    });
+    
+    tl.from(".page1 h1", {
+        y: -80,
+        opacity: 0,
+        duration: 0.5,
+        delay: 0.1,
+    });
 });
 
 
