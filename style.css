@@ -7,11 +7,14 @@
 html, body {
     height: 100%;
     width: 100%;
-    scroll-behavior: smooth;
+    /* position: relative; */
+    /* scroll-behavior: smooth; */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: 400;
     background-color: #000;
 }
+
+
 
 h2 {
     font-size: clamp(24px, 5vw, 40px);
@@ -84,11 +87,12 @@ h2 {
 
 
 .page2 {
+    /* height: 100%; */
     width: 100%;
     background-color: #000000;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     overflow: hidden;
     padding: 20px;
 }
@@ -106,9 +110,9 @@ h2 {
 }
 
 .page3 {
-    min-height: 100vh;
+   height: 100%;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: #000000;
     padding: 20px;
 }
@@ -118,6 +122,7 @@ h2 {
     font-weight: 600;
     text-transform: uppercase;
     color: #fff;
+    /* position: fixed; */
 }
 
 /* Media Queries */
@@ -140,7 +145,6 @@ h2 {
 @media screen and (max-width: 480px) {
     #elems {
         border: none;
-        border-radius: 5px;
         flex-direction: column;
         align-items: center;
     }
@@ -149,6 +153,8 @@ h2 {
         text-align: center;
         white-space: nowrap;
     }
+
+   
 }
 
 

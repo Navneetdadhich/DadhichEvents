@@ -80,39 +80,6 @@ gsap.from(".contact-section",{
 });
 
 
-gsap.from(".page2 h4", {
-    // y: 60,
-    // opacity: 0,
-    x: 150,
-    duration: 0.7,
-    delay: 0.5,
-    scrollTrigger: {
-        trigger: ".page2 ",
-        scroller: "body",
-        start: "top 70%",
-        end: "top -10%",
-        // markers: true,
-        scrub: 2,
-    },
-});
-
-gsap.to(".page3 h4", {
-    // y: 60,
-    // opacity: 0,
-    transform: "translateX(-200%)",
-    // duration: 1.5,
-    // delay: 0.5,
-    scrollTrigger: {
-        trigger: ".page3",
-        scroller: "body",
-        start: "top 0%",
-        end: "top -250%",
-        // markers: true,
-        scrub: 3,
-        pin: true,
-    },
-});
-
 
     // about section
 
@@ -145,14 +112,66 @@ gsap.to(".page3 h4", {
     });
 
 
+    gsap.from(".page2 h4", {
+        // y: 60,
+        // opacity: 0,
+        x: 150,
+        duration: 0.7,
+        delay: 0.5,
+        scrollTrigger: {
+            trigger: ".page2 ",
+            scroller: "body",
+            start: "top 70%",
+            end: "top -10%",
+            // markers: true,
+            scrub: 2,
+        },
+    });
+    
+    let mm = gsap.matchMedia();
 
-// contact form
+mm.add("(min-width: 801px)", () => {
+    // Desktop animation
+    gsap.to(".page3 h4", {
+        transform: "translateX(-200%)",
+        scrollTrigger: {
+            trigger: ".page3",
+            scroller: "body",
+            start: "top 0%",
+            end: "top -170%",
+            scrub: 3,
+            pin: true,
+        },
+    });
+});
 
-const BACKEND_URL = 'https://dadhicheventss.onrender.com/api/contact'; // Note the /api/contact endpoint
+mm.add("(max-width: 800px)", () => {
+    // Mobile animation
+    gsap.to(".page3 h4", {
+        transform: "translateX(-200%)",
+        scrollTrigger: {
+            trigger: ".page3",
+            scroller: "body",
+            start: "top 0%",
+            end: "top -100%", // Reduced scroll distance for mobile
+            scrub: 2,         // Faster scrub for mobile
+            pin: true,
+        },
+    });
+});
+    
 
+const API_URL = process.env.NODE_ENV === 'production' 
+    ? 'https://your-render-app-name.onrender.com' 
+    : 'http://localhost:3000';
+
+
+
+// Contact form handling
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    // Disable submit button to prevent double submission
     const submitButton = e.target.querySelector('button[type="submit"]');
     submitButton.disabled = true;
 
@@ -164,41 +183,49 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             message: document.getElementById('message').value.trim()
         };
 
+        // Validate form data
         if (!formData.name || !formData.email || !formData.phone || !formData.message) {
             throw new Error('Please fill in all fields');
         }
 
+        // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             throw new Error('Please enter a valid email address');
         }
 
+        // Phone validation
         const phoneRegex = /^\+?[\d\s-]{10,}$/;
         if (!phoneRegex.test(formData.phone)) {
             throw new Error('Please enter a valid phone number');
         }
 
-        const response = await fetch(BACKEND_URL, {  // Remove template literal
+        const response = await fetch('http://localhost:3000/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
             },
             body: JSON.stringify(formData)
         });
 
+        const data = await response.json();
+        
         if (!response.ok) {
-            throw new Error('Failed to send message');
+            throw new Error(data.message || 'Error sending message');
         }
 
-        const data = await response.json();
+        // Show success message
         alert('Message sent successfully!');
         document.getElementById('contactForm').reset();
 
     } catch (error) {
+        // Show error message
         alert(error.message || 'Error sending message. Please try again.');
         console.error('Error:', error);
     } finally {
+        // Re-enable submit button
         submitButton.disabled = false;
     }
 });
+
+
