@@ -195,7 +195,7 @@ h2 {
 
     .hamburger.active{
         background: none;
-        position: fixed;
+        position: relative;
         /* margin-top: 20px; */
 
     }
