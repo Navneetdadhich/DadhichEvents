@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Dadhich Events</title>
+    <link rel="stylesheet" href="galleryscript.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+        </a>
+        <h1>Our Gallery</h1>
+    </nav>
+
+    <div class="gallery-header">
+        <h2>Capturing Moments</h2>
+        <p>A collection of our finest events and celebrations</p>
+    </div>
+
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">Weddings</button>
+        <button class="filter-btn" data-filter="corporate">Corporate</button>
+        <button class="filter-btn" data-filter="social">Social</button>
+    </div>
+
+    <div class="gallery-container">
+        <!-- Wedding Events -->
+        <div class="gallery-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800" alt="Wedding Event">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Royal Wedding</h3>
+                    <p>Luxury Palace Wedding</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="gallery-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800" alt="Wedding Decor">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Elegant Decor</h3>
+                    <p>Wedding Reception Setup</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Corporate Events -->
+        <div class="gallery-item" data-category="corporate">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800" alt="Corporate Event">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Business Summit</h3>
+                    <p>Annual Corporate Conference</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="gallery-item" data-category="corporate">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800" alt="Business Meeting">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Executive Meet</h3>
+                    <p>Business Leadership Summit</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Social Events -->
+        <div class="gallery-item" data-category="social">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800" alt="Festival Event">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Music Festival</h3>
+                    <p>Annual Cultural Celebration</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="gallery-item" data-category="social">
+            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800" alt="Birthday Party">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Birthday Bash</h3>
+                    <p>Luxury Birthday Celebration</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- More Wedding Events -->
+        <div class="gallery-item" data-category="wedding">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800" alt="Wedding Ceremony">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Garden Wedding</h3>
+                    <p>Outdoor Wedding Ceremony</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- More Corporate Events -->
+        <div class="gallery-item" data-category="corporate">
+            <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800" alt="Tech Conference">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Tech Summit</h3>
+                    <p>Innovation Conference 2024</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- More Social Events -->
+        <div class="gallery-item" data-category="social">
+            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?w=800" alt="Gala Event">
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Charity Gala</h3>
+                    <p>Annual Fundraising Event</p>
+                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img src="" alt="" class="lightbox-image">
+        <div class="lightbox-caption"></div>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
