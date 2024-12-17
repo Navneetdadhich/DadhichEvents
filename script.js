@@ -159,11 +159,43 @@ mm.add("(max-width: 800px)", () => {
         },
     });
 });
+
+function showToast(message, type = 'success') {
+    const toastContainer = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+    
+    toast.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span class="toast-message">${message}</span>
+        <button class="toast-close">&times;</button>
+    `;
+
+    toastContainer.appendChild(toast);
+
+    // Add click event to close button
+    const closeButton = toast.querySelector('.toast-close');
+    closeButton.addEventListener('click', () => {
+        toast.style.animation = 'slideOut 0.3s ease-out forwards';
+        setTimeout(() => toast.remove(), 300);
+    });
+
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }, 5000);
+}
+
+
     
 const API_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000'
     : 'https://dadhichevents.onrender.com';
-
 
   
 // Contact form handling
@@ -171,7 +203,15 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Disable submit button to prevent double submission
-    const submitButton = e.target.querySelector('button[type="submit"]');
+    // const submitButton = e.target.querySelector('button[type="submit"]');
+    
+    const submitButton = document.getElementById('submitButton');
+    submitButton.disabled = true;
+    const buttonText = submitButton.querySelector('.button-text');
+    const loadingSpinner = submitButton.querySelector('.loading-spinner');
+    
+    buttonText.style.display = 'none';
+    loadingSpinner.style.display = 'block';
     submitButton.disabled = true;
 
     try {
@@ -184,19 +224,22 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
         // Validate form data
         if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-            throw new Error('Please fill in all fields');
+            showToast('Please fill in all fields', 'error');
+        return;
         }
 
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
-            throw new Error('Please enter a valid email address');
+            showToast('Please enter a valid email address', 'error');
+        return;
         }
 
         // Phone validation
         const phoneRegex = /^\+?[\d\s-]{10,}$/;
         if (!phoneRegex.test(formData.phone)) {
-            throw new Error('Please enter a valid phone number');
+            showToast('Please enter a valid 10-digit phone number', 'error');
+        return;
         }
 
         const response = await fetch(`${API_URL}/api/contact`, {
@@ -209,22 +252,40 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
         const data = await response.json();
         
-        if (!response.ok) {
-            throw new Error(data.message || 'Error sending message');
+        if (response.ok) {
+            showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+            document.getElementById('contactForm').reset();
+        } else {
+            showToast(data.message || 'Something went wrong. Please try again.', 'error');
         }
-
-        // Show success message
-        alert('Message sent successfully!');
         document.getElementById('contactForm').reset();
 
     } catch (error) {
         // Show error message
-        alert(error.message || 'Error sending message. Please try again.');
+        showToast('Network error. Please try again later.', 'error');
         console.error('Error:', error);
     } finally {
         // Re-enable submit button
+        buttonText.style.display = 'block';
+        loadingSpinner.style.display = 'none';
         submitButton.disabled = false;
     }
 });
 
 
+// Hamburger menu functionality
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('#elems');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when clicking a link
+document.querySelectorAll('#elems a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
