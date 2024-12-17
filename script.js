@@ -162,7 +162,7 @@ mm.add("(max-width: 800px)", () => {
     
 
 const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://your-render-app-name.onrender.com' 
+    ? 'https://dadhichevents.onrender.com' 
     : 'http://localhost:3000';
 
 
