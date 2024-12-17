@@ -163,6 +163,13 @@ mm.add("(min-width: 801px)", () => {
             end: "top -170%",
             scrub: 3,
             pin: true,
+            pinSpacing: true,
+            onLeave: self => {
+                gsap.set(".page3 h4", { clearProps: "all" });
+            },
+            onEnterBack: self => {
+                gsap.set(".page3 h4", { clearProps: "all" });
+            }
         },
     });
 });
@@ -178,6 +185,13 @@ mm.add("(max-width: 800px)", () => {
             end: "top -100%", // Reduced scroll distance for mobile
             scrub: 2,         // Faster scrub for mobile
             pin: true,
+            pinSpacing: true,
+            onLeave: self => {
+                gsap.set(".page3 h4", { clearProps: "all" });
+            },
+            onEnterBack: self => {
+                gsap.set(".page3 h4", { clearProps: "all" });
+            }
         },
     });
 });
