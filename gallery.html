@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/linklogo.png" type="image/x-icon">
     <title>Gallery | Dadhich Events</title>
     <link rel="stylesheet" href="galleryscript.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,11 +26,54 @@
     <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="wedding">Weddings</button>
-        <button class="filter-btn" data-filter="corporate">Corporate</button>
-        <button class="filter-btn" data-filter="social">Social</button>
+        <button class="filter-btn" data-filter="corporate">School</button>
+        <button class="filter-btn" data-filter="social">Garba</button>
     </div>
 
     <div class="gallery-container">
+
+        <div class="gallery-item" data-category="wedding">
+            <video class="gallery-video" poster="images/ps1.png">
+                <source src="images/1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Dance choreography</h3>
+                    <p>video</p>
+                    <button class="view-btn"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Another Video Example -->
+        <div class="gallery-item" data-category="wedding">
+            <video class="gallery-video" poster="images/ps1.png">
+                <source src="images/2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Dance choreography</h3>
+                    <p>video</p>
+                    <button class="view-btn"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-category="wedding">
+            <video class="gallery-video" poster="images/ps1.png">
+                <source src="images/3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay">
+                <div class="overlay-content">
+                    <h3>Dance choreography</h3>
+                    <p>video</p>
+                    <button class="view-btn"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+        </div>
         <!-- Wedding Events -->
         <div class="gallery-item" data-category="wedding">
             <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800" alt="Wedding Event">
@@ -139,9 +183,20 @@
     <!-- Lightbox -->
     <div class="lightbox">
         <span class="close-lightbox">&times;</span>
-        <img src="" alt="" class="lightbox-image">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image">
+            <video class="lightbox-video" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
         <div class="lightbox-caption"></div>
     </div>
+
+    <footer class="footer">
+        <p>Made with <i class="fas fa-heart"></i> by <a href="https://github.com/Navneetdadhich">Navneet Dadhich</a></p>
+    </footer>
+
 
     <script src="gallery.js"></script>
 </body>
