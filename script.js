@@ -6,14 +6,14 @@ ma.add("(min-width: 801px)", () => {
     
     tl.from(".page1", {
         opacity: 0,
-        duration: 1,
+        duration: 0.6,
         // delay: 0.5,
     });
     
     tl.from("#elems", {
         y: -20,
         opacity: 0,
-        duration: 0.7,
+        duration: 0.2,
         delay: 0.2,
         stagger: 0.3,
     });
@@ -28,7 +28,7 @@ ma.add("(min-width: 801px)", () => {
     tl.from(".page1 h1", {
         y: -80,
         opacity: 0,
-        duration: 1,
+        duration: 0.7,
         delay: 0.2,
     });
 });
@@ -47,6 +47,7 @@ ma.add("(max-width: 800px)", () => {
         opacity: 0,
         duration: 0.5,
         delay: 0.1,
+        // stagger: 0.15,
     });
 });
 
