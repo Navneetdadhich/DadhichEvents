@@ -242,6 +242,15 @@ h2 {
         white-space: nowrap;
     }
 
+    .hamburger.active{
+        z-index: 102;
+        margin-top: 30px;
+        padding: 0px;
+        display: block;
+        position: fixed;
+        border-radius: 5px;
+    }
+
     
 }
 
